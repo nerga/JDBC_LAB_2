@@ -29,14 +29,14 @@ public class Add{
 	int Id = scanner.nextInt();
 	scanner.nextLine();
 	
-	System.out.print("Enter your last name: ");
-	String lastName = scanner.nextLine();
-	scanner.nextLine();
-	
 	System.out.print("Enter your first name: ");
 	String firstName = scanner.nextLine();
-	scanner.nextLine();
 
+	
+	System.out.print("Enter your last name: ");
+	String lastName = scanner.nextLine();
+
+	
 	System.out.print("Enter your age: ");
 	int age = scanner.nextInt();
 	scanner.nextLine();
