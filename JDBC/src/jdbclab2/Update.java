@@ -2,6 +2,7 @@ package jdbclab2;
 
 //STEP 1. Import required packages
 import java.sql.*;
+import java.util.Scanner;
 
 public class Update{
     // JDBC driver name and database URL
@@ -18,6 +19,28 @@ public class Update{
     public static void update() {
 	Connection conn = null;
 	Statement stmt = null;
+	@SuppressWarnings("resource")
+	Scanner scanner = new Scanner(System.in);
+
+	System.out.println("Enter the Id: ");
+	int Id1 = scanner.nextInt();
+	scanner.nextLine();
+	
+	System.out.println("Enter the new Id: ");
+	int Id2 = scanner.nextInt();
+	scanner.nextLine();
+	
+	System.out.print("Enter the new last name: ");
+	String lastName = scanner.nextLine();
+	scanner.nextLine();
+	
+	System.out.print("Enter the new first name: ");
+	String firstName = scanner.nextLine();
+	scanner.nextLine();
+
+	System.out.print("Enter the new age: ");
+	int age = scanner.nextInt();
+	scanner.nextLine();
 
 	try {
 	    // STEP 3: Open a connection
@@ -28,28 +51,29 @@ public class Update{
 	      //STEP 4: Execute a query
 	      System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
-	      String sql = "UPDATE Artist " +
-	                   "SET age = 30 WHERE id in (1, 2)";
-	      stmt.executeUpdate(sql);
-
-	      // Now you can extract all the records
-	      // to see the updated records
-	      sql = "SELECT id, first_name, last_name, age FROM Artist";
-	      ResultSet rs = stmt.executeQuery(sql);
-
-	      while(rs.next()){
-	         //Retrieve by column name
-	         int id  = rs.getInt("id");
-	         int age = rs.getInt("age");
-	         String first = rs.getString("first_name");
-	         String last = rs.getString("last_name");
-
-	         //Display values
-	         System.out.print("ID: " + id);
-	         System.out.print(", Age: " + age);
-	         System.out.print(", First: " + first);
-	         System.out.println(", Last: " + last);
-	      }
+	      ResultSet rs = stmt.executeQuery("select * from Artist where id="+Id1+" ");
+//	      while(rs.next()){
+//	         //Retrieve by column name
+//	         int id  = rs.getInt("id");
+//	         int age1 = rs.getInt("age");
+//	         String first = rs.getString("first_name");
+//	         String last = rs.getString("last_name");
+//
+//	         //Display values
+//	         System.out.print("ID: " + id);
+//	         System.out.print(", Age: " + age1);
+//	         System.out.print(", First: " + first);
+//	         System.out.println(", Last: " + last);
+//	      }
+	      PreparedStatement ps = conn.prepareStatement("Update Artist where id=(?) (id,first_name, last_name, age) VALUES (?, ?, ?, ?)");
+	      ps.setInt(1, Id1);
+	      ps.setInt(2, Id2);
+	      ps.setString(3, firstName);
+	      ps.setString(4, lastName);
+	      ps.setInt(5, age);
+	      
+	       
+	      ps.executeUpdate();
 	      rs.close();
 	} catch (SQLException se) {
 	    // Handle errors for JDBC

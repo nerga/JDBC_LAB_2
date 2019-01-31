@@ -36,7 +36,6 @@ public class SearchId{
 	      System.out.println("Creating statement...");
 	      stmt = conn.createStatement();
 
-	      // Extract records without any condition.
 	      System.out.println("Fetching records with condition...");
 	      ResultSet rs = stmt.executeQuery("select * from Artist where id="+Id+" ");
 
