@@ -21,60 +21,39 @@ public class Update{
 	Statement stmt = null;
 	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
+	    
 
-	System.out.println("Enter the Id: ");
-	int Id1 = scanner.nextInt();
-	scanner.nextLine();
-	
-	System.out.println("Enter the new Id: ");
-	int Id2 = scanner.nextInt();
-	scanner.nextLine();
-	
-	System.out.print("Enter the new last name: ");
-	String lastName = scanner.nextLine();
-	scanner.nextLine();
-	
-	System.out.print("Enter the new first name: ");
-	String firstName = scanner.nextLine();
-	scanner.nextLine();
+        
+	int Id;
+        System.out.println("Enter id to update: ");
+        Id = scanner.nextInt();
+        
+        String firstName;
+        System.out.println("Enter first name: ");
+        firstName = scanner.next();
 
-	System.out.print("Enter the new age: ");
-	int age = scanner.nextInt();
-	scanner.nextLine();
+        String lastName;
+        System.out.println("Enter last name: ");
+        lastName = scanner.next();
+
+        int age;
+        System.out.println("Enter age: ");
+        age = scanner.nextInt();
 
 	try {
 	    // STEP 3: Open a connection
 	    System.out.println("Connecting to a selected database...");
 	    conn = DriverManager.getConnection(URL, USER, PASS);
 	    System.out.println("Connected database successfully...");
-
+	      stmt = conn.createStatement();
 	      //STEP 4: Execute a query
 	      System.out.println("Creating statement...");
-	      stmt = conn.createStatement();
-	      ResultSet rs = stmt.executeQuery("select * from Artist where id="+Id1+" ");
-//	      while(rs.next()){
-//	         //Retrieve by column name
-//	         int id  = rs.getInt("id");
-//	         int age1 = rs.getInt("age");
-//	         String first = rs.getString("first_name");
-//	         String last = rs.getString("last_name");
-//
-//	         //Display values
-//	         System.out.print("ID: " + id);
-//	         System.out.print(", Age: " + age1);
-//	         System.out.print(", First: " + first);
-//	         System.out.println(", Last: " + last);
-//	      }
-	      PreparedStatement ps = conn.prepareStatement("Update Artist where id=(?) (id,first_name, last_name, age) VALUES (?, ?, ?, ?)");
-	      ps.setInt(1, Id1);
-	      ps.setInt(2, Id2);
-	      ps.setString(3, firstName);
-	      ps.setString(4, lastName);
-	      ps.setInt(5, age);
-	      
-	       
-	      ps.executeUpdate();
-	      rs.close();
+	      String sql = "UPDATE artist SET first_name = '" + firstName + "',last_name = '" + lastName + "',age = '" + age + "' WHERE id = " + Id;
+	      stmt.executeUpdate(sql);	
+
+	        System.out.println("The Record has successfully been updated");
+
+	        
 	} catch (SQLException se) {
 	    // Handle errors for JDBC
 	    se.printStackTrace();

@@ -41,12 +41,12 @@ public class Add{
 	int age = scanner.nextInt();
 	scanner.nextLine();
 	try {
-	    //Connection
+
 	    System.out.println("Connecting to a selected database...");
 	    conn = DriverManager.getConnection(URL, USER, PASS);
 	    System.out.println("Connected database successfully...");
 
-	    //Execute a query
+
 	      System.out.println("Inserting records into the table...");
 	      stmt = conn.createStatement();
 	      
