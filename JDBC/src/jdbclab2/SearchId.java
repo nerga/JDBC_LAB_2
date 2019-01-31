@@ -2,6 +2,7 @@ package jdbclab2;
 
 //STEP 1. Import required packages
 import java.sql.*;
+import java.util.Scanner;
 
 public class SearchId{
     // JDBC driver name and database URL
@@ -18,6 +19,12 @@ public class SearchId{
     public static void sId() {
 	Connection conn = null;
 	Statement stmt = null;
+	@SuppressWarnings("resource")
+	Scanner scanner = new Scanner(System.in);
+
+	System.out.println("Enter the id: ");
+	int Id = scanner.nextInt();
+	scanner.nextLine();
 
 	try {
 	    // STEP 3: Open a connection
@@ -31,9 +38,7 @@ public class SearchId{
 
 	      // Extract records without any condition.
 	      System.out.println("Fetching records with condition...");
-	      String sql = "SELECT id, first_name, last_name, age FROM Artist" +
-	                   " WHERE id <= 1 ";
-	      ResultSet rs = stmt.executeQuery(sql);
+	      ResultSet rs = stmt.executeQuery("select * from Artist where id="+Id+" ");
 
 	      while(rs.next()){
 	         //Retrieve by column name

@@ -35,13 +35,11 @@ public class Driver {
 	// Delete
 	case "2":
 	    Delete.delete();
-	    // Here be a body
 	    break;
 
 	// Update
 	case "3":
 	    Update.update();
-	    // Here be a body
 	    break;
 
 	// Show all
@@ -52,19 +50,16 @@ public class Driver {
 	// Search by Id
 	case "5":
 	    SearchId.sId();
-	    // Here be a body
 	    break;
 
 	// Search by age
 	case "6":
 	    SearchAge.sAge();
-	    // Here be a body
 	    break;
 
 	// Search by name
 	case "7":
 	    SearchName.sName();
-	    // Here be a body
 	    break;
 	}
 

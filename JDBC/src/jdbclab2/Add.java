@@ -19,8 +19,10 @@ public class Add{
 	System.out.println("Please Enter Category name:");
 
 	Connection conn = null;
+	@SuppressWarnings("unused")
 	Statement stmt = null;
 
+	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
 
 	System.out.println("Enter the Id: ");
