@@ -4,7 +4,7 @@ package jdbclab2;
 import java.sql.*;
 import java.util.Scanner;
 
-public class SearchName{
+public class SearchLastName{
     // JDBC driver name and database URL
     static final String URL = "jdbc:mysql://localhost:3306/lab2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
@@ -22,7 +22,7 @@ public class SearchName{
 	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
 
-	System.out.println("Enter the first name: ");
+	System.out.println("Enter the last name: ");
 	String name = scanner.nextLine();
 	scanner.nextLine();
 
@@ -38,7 +38,7 @@ public class SearchName{
 
 	      // Extract records without any condition.
 	      System.out.println("Fetching records with condition...");
-	      ResultSet rs = stmt.executeQuery("select * from Artist where first_name="+name+" ");
+	      ResultSet rs = stmt.executeQuery("select * from Artist where last_name="+name+" ");
 
 	      while(rs.next()){
 	         //Retrieve by column name

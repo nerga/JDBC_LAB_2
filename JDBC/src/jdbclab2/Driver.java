@@ -20,10 +20,12 @@ public class Driver {
 	System.out.println("1, Add ");
 	System.out.println("2, Delete ");
 	System.out.println("3, Update ");
-	System.out.println("4, Show All");
-	System.out.println("5, Search by Id");
-	System.out.println("6, Search by Age");
-	System.out.println("7, Search by Name");
+	System.out.println("4, Show all");
+	System.out.println("5, Search by id");
+	System.out.println("6, Search by age");
+	System.out.println("7, Search by first name");
+	System.out.println("8, Search by last name");
+	System.out.println("9, Search by full name");
 	String menu = sc.nextLine();
 	
 	switch (menu) {
@@ -57,11 +59,23 @@ public class Driver {
 	    SearchAge.sAge();
 	    break;
 
-	// Search by name
+	// Search by first name
 	case "7":
-	    SearchName.sName();
+	    SearchFirstName.sName();
+	    break;
+	    
+	// Search by last name    
+	case "8": 
+	    SearchLastName.sName();
+	    break;
+	    
+	// Search by full name
+	case "9":
+	    SearchFullName.sName();
 	    break;
 	}
+	
+		
 
     }
 
