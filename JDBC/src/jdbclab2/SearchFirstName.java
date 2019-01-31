@@ -18,13 +18,14 @@ public class SearchFirstName{
 
     public static void sName() {
 	Connection conn = null;
+	@SuppressWarnings("unused")
 	Statement stmt = null;
 	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
 
 	System.out.println("Enter the first name: ");
-	String name = scanner.nextLine();
-	scanner.nextLine();
+	String firstName = scanner.nextLine();
+
 
 	try {
 	    // STEP 3: Open a connection
@@ -38,7 +39,11 @@ public class SearchFirstName{
 
 	      // Extract records without any condition.
 	      System.out.println("Fetching records with condition...");
-	      ResultSet rs = stmt.executeQuery("select first_name from Artist WHERE first_name="+name+" ");
+
+	      PreparedStatement ps = conn.prepareStatement("SELECT * from Artist where first_name=(?)");
+	      ps.setString(1, firstName);
+	      ResultSet rs = ps.executeQuery();
+
 
 	      while(rs.next()){
 	         //Retrieve by column name
@@ -54,7 +59,7 @@ public class SearchFirstName{
 	         System.out.println(", Last: " + last);
 	      }
 
-	      rs.close();
+	      ps.close();
 	} catch (SQLException se) {
 	    // Handle errors for JDBC
 	    se.printStackTrace();

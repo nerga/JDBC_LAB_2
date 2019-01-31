@@ -24,11 +24,11 @@ public class SearchFullName{
 
 	System.out.println("Enter the first name: ");
 	String firstName = scanner.nextLine();
-	scanner.nextLine();
+
 	
 	System.out.println("Enter the last name: ");
 	String lastName = scanner.nextLine();
-	scanner.nextLine();
+
 
 	try {
 	    // STEP 3: Open a connection
@@ -42,8 +42,11 @@ public class SearchFullName{
 
 	      // Extract records without any condition.
 	      System.out.println("Fetching records with condition...");
-	      ResultSet rs = stmt.executeQuery("select * from Artist where first_name="+firstName+"and last_name="+lastName+" ");
-
+	      PreparedStatement ps = conn.prepareStatement("SELECT * from Artist where first_name=(?) and last_name=(?)");
+	      ps.setString(1, firstName);
+	      ps.setString(2, lastName);
+	      ResultSet rs = ps.executeQuery();
+	      
 	      while(rs.next()){
 	         //Retrieve by column name
 	         int id  = rs.getInt("id");
